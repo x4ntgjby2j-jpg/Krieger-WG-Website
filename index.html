@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krieger WG - Select Your Champion</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #121212;
+            --accent: #00ff04; 
+            --text: #ffffff;
+            --transition-speed: 0.5s;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        .screen {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .hidden { display: none !important; }
+
+        /* --- SELECTION SCREEN --- */
+        #selection-screen h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 12px;
+            margin-bottom: 40px;
+            text-align: center;
+            color: var(--accent);
+            text-shadow: 0 0 30px rgba(0, 255, 4, 0.5);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            width: 100%;
+            margin-bottom: 60px;
+        }
+
+        .char-card {
+            background: var(--card-bg);
+            border: 2px solid #222;
+            border-radius: 15px;
+            padding: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .char-card:hover {
+            border-color: var(--accent);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(0, 255, 4, 0.3);
+        }
+
+        .char-card img {
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid var(--accent);
+        }
+
+        /* --- KONTAKTFORMULAR --- */
+        .contact-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid var(--accent);
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 0 20px rgba(0, 255, 4, 0.1);
+        }
+
+        .contact-box h2 { color: var(--accent); text-transform: uppercase; margin-top: 0; text-align: center; }
+
+        .radio-group {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #333;
+            transition: 0.2s;
+            text-align: left;
+        }
+
+        .radio-option:hover { background: #252525; border-color: var(--accent); }
+
+        .radio-option input { margin-right: 15px; accent-color: var(--accent); }
+
+        .contact-box input[type="text"], .contact-box input[type="email"], .contact-box textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .contact-box textarea {
+            resize: vertical;
+            outline: none;
+        }
+
+        .contact-box button {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            border: none;
+            color: black;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* --- PROFILE SCREEN --- */
+        .profile-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1100px;
+            background: rgba(15, 15, 15, 0.98);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid var(--accent);
+            margin-top: 20px;
+        }
+
+        .profile-left img { width: 300px; border-radius: 20px; border: 4px solid var(--accent); box-shadow: 0 0 20px var(--accent); }
+        .back-btn { margin-bottom: 20px; padding: 12px 25px; background: var(--accent); color: black; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; }
+
+        .skill-row { margin-bottom: 15px; width: 100%; }
+        .bar-bg { background: #333; height: 10px; border-radius: 5px; margin-top: 5px; }
+        .bar-fill { background: var(--accent); height: 100%; width: 0%; transition: width 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+
+        @media (max-width: 900px) { .profile-container { flex-direction: column; align-items: center; text-align: center; } }
+    </style>
+</head>
+<body>
+
+    <div id="selection-screen" class="screen">
+        <h1>Krieger WG</h1>
+        
+        <div class="grid">
+            <div class="char-card" onclick="showProfile(0)">
+                <img src="aeneas.jpg" alt="Aeneas">
+                <h3>Aeneas</h3>
+                <p>Der Boss</p>
+            </div>
+            <div class="char-card" onclick="showProfile(1)">
+                <img src="samuel.jpg" alt="Samuel">
+                <h3>Samuel</h3>
+                <p>Floor-Manager</p>
+            </div>
+            <div class="char-card" onclick="showProfile(2)">
+                <img src="lorenz.jpg" alt="Lorenz">
+                <h3>Lorenz</h3>
+                <p>CTO</p>
+            </div>
+            <div class="char-card" onclick="showProfile(3)">
+                <img src="jonas.jpg" alt="Jonas">
+                <h3>Jonas</h3>
+                <p>Der DADDY</p>
+            </div>
+        </div>
+
+        <div class="contact-box">
+            <h2>Audienz beantragen</h2>
+            <form action="https://formspree.io/f/mzdkelyv" method="POST">
+                <input type="text" name="name" placeholder="Dein Name" required>
+                <input type="email" name="email" placeholder="Deine E-Mail" required>
+                
+                <div style="margin: 15px 0 5px 0; font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; text-align: left;">Anlass der Audienz:</div>
+                <div class="radio-group">
+                    <label class="radio-option">
+                        <input type="radio" name="grund" value="Kaffee" checked> Auf ein Kaffee vorbeikommen
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="grund" value="Spieleabend"> Anfrage für einen Spieleabend
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="grund" value="Doppeldate"> Anfrage für ein Doppeldate
+                    </label>
+                </div>
+
+                <textarea name="nachricht" rows="4" placeholder="Zusätzliche Infos für die Krieger (optional)..."></textarea>
+
+                <button type="submit">Anfrage abschicken</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="profile-screen" class="screen hidden">
+        <button class="back-btn" onclick="showSelection()">← ZURÜCK ZUR KRIEGERSCHAFT</button>
+        
+        <div class="profile-container">
+            <div class="profile-left">
+                <img id="p-img" src="" alt="Profil">
+            </div>
+            <div class="profile-right">
+                <h2 id="p-name" style="font-size: 3rem; margin: 0; color: var(--accent); text-transform: uppercase;"></h2>
+                <p id="p-desc" style="font-style: italic; color: var(--accent); margin-bottom: 20px; font-size: 1.2rem;"></p>
+                <p id="p-longtext" style="line-height: 1.8; color: #eee; margin-bottom: 30px; font-size: 1.1rem;"></p>
+                <div id="stats"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const wgDaten = [
+            { 
+                name: "Aeneas", 
+                desc: "Der Boss", 
+                longText: "Aeneas ist nicht nur der Boss dieser WG, sondern laut eigenen Angaben auch der geheime Erfinder der Erdnussbutter. Er verbringt seine Freizeit damit, Eichhörnchen in Karate zu unterrichten und hat einmal einen Grizzlybären im Armdrücken besiegt – nur um ihm danach eine Lebensversicherung zu verkaufen. Wenn er spricht, hören sogar die Wände zu, meistens weil er so laut ist, dass die Nachbarn die Polizei rufen. Er behauptet, er könne fliegen, tue es aber nur nachts, um keine Aufmerksamkeit zu erregen.",
+                img: "aeneas.jpg", 
+                stats: [4, 5, 3, 4, 4] 
+            },
+            { 
+                name: "Samuel", 
+                desc: "Floor-Manager", 
+                longText: "Samuel hat das absolute Gehör für fallende Staubkörner. Er hat im Jahr 2022 den Nobelpreis für 'Laminat-Flüstern' knapp verpasst, weil er während der Verleihung einen Fleck unter dem Sitz des schwedischen Königs entfernen musste. Es wird gemunkelt, dass er unter seinem Bett ein Portal zu einer Dimension besitzt, in der Staubsauger heilig sind. Er kann 48 Stunden am Stück den Boden anstarren, ohne zu blinzeln, und behauptet, er habe das WLAN allein durch die Reibung seiner Socken auf dem Teppich erfunden.",
+                img: "samuel.jpg", 
+                stats: [5, 0, 2, 5, 5] 
+            },
+            { 
+                name: "Lorenz", 
+                desc: "CTO (Chief Toiletten-Officer / Finanzen)", 
+                longText: "Lorenz ist so reich, dass er sein Klopapier aus 500-Euro-Scheinen selbst druckt (legal, natürlich). Er hat die Bitcoin-Blockchain im Kopf mitgeschrieben, bevor es Computer gab. Sein größter Erfolg war es, einer Ente eine Luxus-Eigentumswohnung im WG-Kühlschrank zu vermieten. Er trägt nachts eine goldene Brille, um seine Träume in 4K aufzuzeichnen und sie später als NFTs an Elon Musk zu verkaufen. Er behauptet, er habe den Zinseszins persönlich im 15. Jahrhundert erfunden.",
+                img: "lorenz.jpg", 
+                stats: [5, 4, 3, 5, 4] 
+            },
+            { 
+                name: "Jonas", 
+                desc: "Der DADDY", 
+                longText: "Jonas ist der spirituelle Vater aller Lebewesen im Umkreis von 5 Kilometern. Er hat die Fähigkeit, Instant-Nudeln so zuzubereiten, dass sie nach 5-Gänge-Menü schmecken und gleichzeitig den Hunger in der Welt beenden könnten. Man sagt, sein Bart könne verlorene Schlüssel finden und schlechtes Karma in Schokopudding verwandeln. Einmal hat er den Papst in Sachen Lebensberatung gecoacht. Er schläft nie, er wartet nur darauf, dass jemand ein Problem hat, damit er es mit einem väterlichen Schulterklopfen lösen kann.",
+                img: "jonas.jpg", 
+                stats: [5, 5, 5, 5, 5] 
+            }
+        ];
+
+        const skillNames = ["Sauberkeit", "Frauenversteher", "Lustig", "Verlässlich", "Academic Weapon"];
+
+        function showProfile(index) {
+            const p = wgDaten[index];
+            document.getElementById('p-name').innerText = p.name;
+            document.getElementById('p-desc').innerText = p.desc;
+            document.getElementById('p-longtext').innerText = p.longText;
+            document.getElementById('p-img').src = p.img;
+            
+            const statsContainer = document.getElementById('stats');
+            statsContainer.innerHTML = '';
+            p.stats.forEach((val, i) => {
+                statsContainer.innerHTML += `
+                    <div class="skill-row">
+                        <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                            <span>${skillNames[i]}</span>
+                            <span>${val}/5</span>
+                        </div>
+                        <div class="bar-bg"><div class="bar-fill" id="bar-${i}" style="width: 0%"></div></div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('selection-screen').classList.add('hidden');
+            document.getElementById('profile-screen').classList.remove('hidden');
+            window.scrollTo(0,0);
+
+            setTimeout(() => {
+                p.stats.forEach((val, i) => {
+                    document.getElementById(`bar-${i}`).style.width = (Math.max(0, val) * 20) + '%';
+                });
+            }, 200);
+        }
+
+        function showSelection() {
+            document.getElementById('profile-screen').classList.add('hidden');
+            document.getElementById('selection-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
