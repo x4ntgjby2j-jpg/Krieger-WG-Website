@@ -339,16 +339,18 @@
             document.getElementById('p-longtext').innerText = p.longText;
             document.getElementById('p-img').src = p.img;
             
-            const statsContainer = document.getElementById('stats');
+           const statsContainer = document.getElementById('stats');
             statsContainer.innerHTML = '';
             p.stats.forEach((val, i) => {
                 statsContainer.innerHTML += `
-                    <div class="skill-row">
-                        <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                    <div class="skill-row" style="margin-bottom: 15px;">
+                        <div style="display:flex; justify-content:space-between; font-weight:bold; margin-bottom: 5px;">
                             <span>${skillNames[i]}</span>
                             <span>${val}/5</span>
                         </div>
-                        <div class="bar-bg"><div class="bar-fill" id="bar-${i}" style="width: 0%"></div></div>
+                        <div class="bar-bg" style="background: #333; height: 12px; border-radius: 6px; overflow: hidden;">
+                            <div class="bar-fill" id="bar-${i}" style="width: 0%; height: 12px; background: var(--accent); transition: width 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67);"></div>
+                        </div>
                     </div>
                 `;
             });
