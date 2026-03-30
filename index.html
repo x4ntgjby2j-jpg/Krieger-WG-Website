@@ -229,9 +229,9 @@
             <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
             <p><strong>Die ungeschönte Wahrheit der Krieger:</strong></p>
             <ul style="line-height: 1.8; color: #ccc;">
-                <li>⚠️ Samuel hat seit 3 Wochen nicht staubgesaugt.</li>
-                <li>💰 Lorenz schuldet der Kasse noch 4,50€ für Pizza.</li>
-                <li>🤫 Aeneas schläft heimlich mit einem Kuscheltier namens "Fluffi".</li>
+                <li>⚠️ Die KriegerWG wird auf eigene Gefahr betretten wir übernehmen keine Haftung!!!</li>
+                <li>💰 Die kriegskasse wird durch spenden Finanziert</li>
+                <li>🤫 Die Krieger WG ist der legendärste ort in Karli um ein Weinkarton zu vernichten".</li>
             </ul>
         </div>
     </div>
@@ -257,21 +257,21 @@
             { 
                 name: "Krieger1", 
                 desc: "Der Boss", 
-                longText: "Aeneas ist nicht nur der Boss dieser WG, sondern laut eigenen Angaben auch der geheime Erfinder der Erdnussbutter. Er verbringt seine Freizeit damit, Eichhörnchen in Karate zu unterrichten und hat einmal einen Grizzlybären im Armdrücken besiegt – nur um ihm danach eine Lebensversicherung zu verkaufen. Wenn er spricht, hören sogar die Wände zu, meistens weil er so laut ist, dass die Nachbarn die Polizei rufen. Er behauptet, er könne fliegen, tue es aber nur nachts, um keine Aufmerksamkeit zu erregen.",
+                longText: "Er ist der Ersteller des Kriegerportals und hat alles im Griff. Normalerweise trainiert er seine Physis im Gym oder brabbelt seine Mitbewohnwer zu.",
                 img: "Krieger1.png", 
                 stats: [4, 5, 3, 4, 4] 
             },
             { 
                 name: "Krieger2", 
                 desc: "Floor-Manager", 
-                longText: "Samuel hat das absolute Gehör für fallende Staubkörner. Er hat im Jahr 2022 den Nobelpreis für 'Laminat-Flüstern' knapp verpasst, weil er während der Verleihung einen Fleck unter dem Sitz des schwedischen Königs entfernen musste. Es wird gemunkelt, dass er unter seinem Bett ein Portal zu einer Dimension besitzt, in der Staubsauger heilig sind. Er kann 48 Stunden am Stück den Boden anstarren, ohne zu blinzeln, und behauptet, er habe das WLAN allein durch die Reibung seiner Socken auf dem Teppich erfunden.",
+                longText: "Der Floormanager kümmert sich um die Sauberkeit der Böden. Wenn er nicht gerade die Böden reinigt geht er ebenfalls wie Krieger 1 ins Gym um seine physis zu verbessern. Krieger 2 ist eher zurückhaltend. Nach 2-3 Bier wird er aber sehr gesprächig.",
                 img: "Krieger2.png", 
                 stats: [5, 0, 2, 5, 5] 
             },
             { 
                 name: "Krieger3", 
                 desc: "CTO (Chief Toiletten-Officer / Finanzen)", 
-                longText: "Lorenz ist so reich, dass er sein Klopapier aus 500-Euro-Scheinen selbst druckt (legal, natürlich). Er hat die Bitcoin-Blockchain im Kopf mitgeschrieben, bevor es Computer gab. Sein größter Erfolg war es, einer Ente eine Luxus-Eigentumswohnung im WG-Kühlschrank zu vermieten. Er trägt nachts eine goldene Brille, um seine Träume in 4K aufzuzeichnen und sie später als NFTs an Elon Musk zu verkaufen. Er behauptet, er habe den Zinseszins persönlich im 15. Jahrhundert erfunden.",
+                longText: "Krieger 3 Kümmert sich um die Kiegskasse. Er ",
                 img: "Krieger3.png", 
                 stats: [5, 4, 3, 5, 4] 
             },
@@ -324,34 +324,34 @@
         }
         // ... hier steht dein bisheriger Code (showProfile, showSelection etc.) ...
 
-        // --- HIER DEN NEUEN CODE EINFÜGEN ---
-        async function checkPassword() {
-            const gespeicherterHash = "54AFC667DB70A404B33657C13D2987B75E35B5A16003FFA5C02D4EEF7CB9B82E";
-            const eingabe = prompt("Identifiziere dich, Krieger! Gib das Passwort ein:");
-            if (!eingabe) return; 
+        // Diese Funktion prüft das Passwort für die GANZE Seite
+async function checkMainPassword() {
+    // Dein Hash (54AFC667...) bleibt gleich
+    const gespeicherterHash = "54AFC667DB70A404B33657C13D2987B75E35B5A16003FFA5C02D4EEF7CB9B82E";
+    
+    const eingabe = prompt("Gib das Master-Passwort für die Krieger-WG ein:");
+    if (!eingabe) return;
 
-            const eingabeHash = await sha256(eingabe);
+    const eingabeHash = await sha256(eingabe);
 
-            if (eingabeHash === gespeicherterHash) {
-                alert("Zugriff gewährt! Willkommen im inneren Zirkel.");
-                const secretArea = document.getElementById('secret-area');
-                secretArea.classList.remove('hidden');
-                setTimeout(() => {
-                    secretArea.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            } else {
-                alert("FALSCH! Versuchs nochmal, wenn du würdig bist.");
-            }
-        }
+    if (eingabeHash === gespeicherterHash) {
+        // Erfolg: Login weg, Content her!
+        document.getElementById('login-overlay').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        alert("Willkommen, Krieger!");
+    } else {
+        alert("Zutritt verweigert! Du gehörst nicht zu uns.");
+    }
+}
 
-        async function sha256(message) {
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-            return hashHex.toUpperCase();
-        }
-        // --- ENDE DES NEUEN CODES ---
+// Die sha256 Funktion muss natürlich auch im Script bleiben
+async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashHex.toUpperCase();
+}
 
     </script>
 </body>
