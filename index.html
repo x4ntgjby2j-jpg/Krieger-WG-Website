@@ -167,195 +167,128 @@
     </style>
 </head>
 <body>
-
-    <div id="selection-screen" class="screen">
-        <h1>Krieger WG</h1>
-        
-        <div class="grid">
-            <div class="char-card" onclick="showProfile(0)">
-                <img src="Krieger1.png" alt="Krieger1">
-                <h3>Krieger 1</h3>
-                <p>Der Boss</p>
-            </div>
-            <div class="char-card" onclick="showProfile(1)">
-                <img src="Krieger2.png" alt="Krieger2">
-                <h3>Krieger 2</h3>
-                <p>Floor-Manager</p>
-            </div>
-            <div class="char-card" onclick="showProfile(2)">
-                <img src="Krieger3.png" alt="Krieger3">
-                <h3>Krieger 3</h3>
-                <p>CTO</p>
-            </div>
-            <div class="char-card" onclick="showProfile(3)">
-                <img src="Krieger4.png" alt="Krieger4">
-                <h3>Krieger 4</h3>
-                <p>Der DADDY</p>
-            </div>
-        </div>
-
-        <div class="contact-box">
-            <h2>Audienz beantragen</h2>
-            <form action="https://formspree.io/f/mzdkelyv" method="POST">
-                <input type="text" name="name" placeholder="Dein Name" required>
-                <input type="email" name="email" placeholder="Deine E-Mail" required>
-                
-                <div style="margin: 15px 0 5px 0; font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; text-align: left;">Anlass der Audienz:</div>
-                <div class="radio-group">
-                    <label class="radio-option">
-                        <input type="radio" name="grund" value="Kaffee" checked> Auf ein Kaffee vorbeikommen
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="grund" value="Spieleabend"> Anfrage für einen Spieleabend
-                    </label>
-                    <label class="radio-option">
-                        <input type="radio" name="grund" value="Doppeldate"> Anfrage für ein Doppeldate
-                    </label>
-                </div>
-
-                <textarea name="nachricht" rows="4" placeholder="Zusätzliche Infos für die Krieger (optional)..."></textarea>
-
-                <button type="submit">Anfrage abschicken</button>
-            </form>
-        </div>
-           <div style="margin-top: 40px; text-align: center;">
-            <button onclick="checkPassword()" style="background: none; border: 1px solid #333; color: #555; cursor: pointer; padding: 10px 20px; border-radius: 5px; text-transform: uppercase; letter-spacing: 1px;">
-                🔒 Interner Krieger-Archiv
+<div id="login-overlay" style="background: var(--bg-color); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <div class="contact-box" style="text-align: center; border-color: var(--accent);">
+            <h1 style="color: var(--accent); text-transform: uppercase; letter-spacing: 5px;">Krieger-Zugang</h1>
+            <p style="margin-bottom: 20px; color: #888;">Identifiziere dich, um die Hallen der WG zu betreten.</p>
+            <button onclick="checkMainPassword()" style="background: var(--accent); color: black; padding: 15px 30px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; width: 100%; text-transform: uppercase;">
+                Passwort eingeben
             </button>
         </div>
-
-        <div id="secret-area" class="hidden" style="margin-top: 50px; padding: 30px; border: 3px double var(--accent); background: #051505; border-radius: 20px; max-width: 600px; width: 100%; text-align: left; box-shadow: 0 0 20px rgba(0,255,4,0.1);">
-            <h2 style="color: var(--accent); text-align: center; text-transform: uppercase;">🔒 DER WG-TRESOR</h2>
-            <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
-            <p><strong>Die ungeschönte Wahrheit der Krieger:</strong></p>
-            <ul style="line-height: 1.8; color: #ccc;">
-                <li>⚠️ Die KriegerWG wird auf eigene Gefahr betretten wir übernehmen keine Haftung!!!</li>
-                <li>💰 Die kriegskasse wird durch spenden Finanziert</li>
-                <li>🤫 Die Krieger WG ist der legendärste ort in Karli um ein Weinkarton zu vernichten".</li>
-            </ul>
-        </div>
     </div>
 
-    <div id="profile-screen" class="screen hidden">
-        <button class="back-btn" onclick="showSelection()">← ZURÜCK ZUR KRIEGERSCHAFT</button>
+    <div id="main-content" style="display: none;">
         
-        <div class="profile-container">
-            <div class="profile-left">
-                <img id="p-img" src="" alt="Profil">
+        <div id="selection-screen" class="screen">
+            <h1>Krieger WG</h1>
+            
+            <div class="grid">
+                <div class="char-card" onclick="showProfile(0)">
+                    <img src="viking_aeneas.jpg" alt="Aeneas">
+                    <h3>Aeneas</h3>
+                    <p>Der Portal-Meister</p>
+                </div>
+                <div class="char-card" onclick="showProfile(1)">
+                    <img src="viking_samuel.jpg" alt="Samuel">
+                    <h3>Samuel</h3>
+                    <p>Der Charmeur</p>
+                </div>
+                <div class="char-card" onclick="showProfile(2)">
+                    <img src="viking_lorenz.jpg" alt="Lorenz">
+                    <h3>Lorenz</h3>
+                    <p>Der seriöse Stratege</p>
+                </div>
+                <div class="char-card" onclick="showProfile(3)">
+                    <img src="viking_jonas.jpg" alt="Jonas">
+                    <h3>Jonas</h3>
+                    <p>Der Fels in der Brandung</p>
+                </div>
             </div>
-            <div class="profile-right">
-                <h2 id="p-name" style="font-size: 3rem; margin: 0; color: var(--accent); text-transform: uppercase;"></h2>
-                <p id="p-desc" style="font-style: italic; color: var(--accent); margin-bottom: 20px; font-size: 1.2rem;"></p>
-                <p id="p-longtext" style="line-height: 1.8; color: #eee; margin-bottom: 30px; font-size: 1.1rem;"></p>
-                <div id="stats"></div>
+
+            <div class="contact-box">
+                <h2>Audienz beantragen</h2>
+                <form action="https://formspree.io/f/mzdkelyv" method="POST">
+                    <input type="text" name="name" placeholder="Dein Name" required>
+                    <input type="email" name="email" placeholder="Deine E-Mail" required>
+                    
+                    <div style="margin: 15px 0 5px 0; font-size: 0.9rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; text-align: left;">Anlass der Audienz:</div>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="grund" value="Kaffee" checked> Auf ein Kaffee vorbeikommen
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="grund" value="Spieleabend"> Anfrage für einen Spieleabend
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="grund" value="Doppeldate"> Anfrage für ein Doppeldate
+                        </label>
+                    </div>
+                    <textarea name="nachricht" rows="4" placeholder="Zusätzliche Infos für die Krieger (optional)..."></textarea>
+                    <button type="submit">Anfrage abschicken</button>
+                </form>
+            </div>
+
+            <div style="margin-top: 40px; text-align: center;">
+                <button onclick="checkInternalVault()" style="background: none; border: 1px solid #333; color: #555; cursor: pointer; padding: 10px 20px; border-radius: 5px; text-transform: uppercase;">
+                    🔒 Interner Krieger-Archiv
+                </button>
+            </div>
+
+            <div id="secret-area" class="hidden" style="margin-top: 50px; padding: 30px; border: 3px double var(--accent); background: #051505; border-radius: 20px; max-width: 600px; width: 100%; text-align: left;">
+                <h2 style="color: var(--accent); text-align: center; text-transform: uppercase;">🔒 DER WG-TRESOR</h2>
+                <p>Hier liegen die Dokumente...</p>
+                </div>
+            
+            <footer style="margin-top: 50px; padding: 20px; border-top: 1px solid #222; font-size: 0.8rem; color: #555;">
+                <p>&copy; 2026 Krieger WG | <a href="#" onclick="alert('Impressum: Aeneas ...')" style="color: #555;">Impressum</a></p>
+            </footer>
+        </div>
+
+        <div id="profile-screen" class="screen hidden">
+            <button class="back-btn" onclick="showSelection()">← ZURÜCK</button>
+            <div class="profile-container">
+                <div class="profile-left"><img id="p-img" src="" alt="Profil"></div>
+                <div class="profile-right">
+                    <h2 id="p-name"></h2>
+                    <p id="p-desc"></p>
+                    <p id="p-longtext"></p>
+                    <div id="stats"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        const wgDaten = [
-            { 
-                name: "Krieger1", 
-                desc: "Der Boss", 
-                longText: "Er ist der Ersteller des Kriegerportals und hat alles im Griff. Normalerweise trainiert er seine Physis im Gym oder brabbelt seine Mitbewohnwer zu.",
-                img: "Krieger1.png", 
-                stats: [4, 5, 3, 4, 4] 
-            },
-            { 
-                name: "Krieger2", 
-                desc: "Floor-Manager", 
-                longText: "Der Floormanager kümmert sich um die Sauberkeit der Böden. Wenn er nicht gerade die Böden reinigt geht er ebenfalls wie Krieger 1 ins Gym um seine physis zu verbessern. Krieger 2 ist eher zurückhaltend. Nach 2-3 Bier wird er aber sehr gesprächig.",
-                img: "Krieger2.png", 
-                stats: [5, 0, 2, 5, 5] 
-            },
-            { 
-                name: "Krieger3", 
-                desc: "CTO (Chief Toiletten-Officer / Finanzen)", 
-                longText: "Krieger 3 Kümmert sich um die Kiegskasse. Er ",
-                img: "Krieger3.png", 
-                stats: [5, 4, 3, 5, 4] 
-            },
-            { 
-                name: "Krieger4", 
-                desc: "Der DADDY", 
-                longText: "Jonas ist der spirituelle Vater aller Lebewesen im Umkreis von 5 Kilometern. Er hat die Fähigkeit, Instant-Nudeln so zuzubereiten, dass sie nach 5-Gänge-Menü schmecken und gleichzeitig den Hunger in der Welt beenden könnten. Man sagt, sein Bart könne verlorene Schlüssel finden und schlechtes Karma in Schokopudding verwandeln. Einmal hat er den Papst in Sachen Lebensberatung gecoacht. Er schläft nie, er wartet nur darauf, dass jemand ein Problem hat, damit er es mit einem väterlichen Schulterklopfen lösen kann.",
-                img: "Krieger4.png", 
-                stats: [5, 5, 5, 5, 5] 
+    </div> <script>
+        // --- PASSWORT LOGIK ---
+        async function checkMainPassword() {
+            const gespeicherterHash = "54AFC667DB70A404B33657C13D2987B75E35B5A16003FFA5C02D4EEF7CB9B82E";
+            const eingabe = prompt("Gib das Master-Passwort ein:");
+            if (!eingabe) return;
+
+            const eingabeHash = await sha256(eingabe);
+
+            if (eingabeHash === gespeicherterHash) {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                alert("Falsches Passwort!");
             }
-        ];
-
-        const skillNames = ["Sauberkeit", "Frauenversteher", "Lustig", "Verlässlich", "Academic Weapon"];
-
-        function showProfile(index) {
-            const p = wgDaten[index];
-            document.getElementById('p-name').innerText = p.name;
-            document.getElementById('p-desc').innerText = p.desc;
-            document.getElementById('p-longtext').innerText = p.longText;
-            document.getElementById('p-img').src = p.img;
-            
-            const statsContainer = document.getElementById('stats');
-            statsContainer.innerHTML = '';
-            p.stats.forEach((val, i) => {
-                statsContainer.innerHTML += `
-                    <div class="skill-row">
-                        <div style="display:flex; justify-content:space-between; font-weight:bold;">
-                            <span>${skillNames[i]}</span>
-                            <span>${val}/5</span>
-                        </div>
-                        <div class="bar-bg"><div class="bar-fill" id="bar-${i}" style="width: 0%"></div></div>
-                    </div>
-                `;
-            });
-
-            document.getElementById('selection-screen').classList.add('hidden');
-            document.getElementById('profile-screen').classList.remove('hidden');
-            window.scrollTo(0,0);
-
-            setTimeout(() => {
-                p.stats.forEach((val, i) => {
-                    document.getElementById(`bar-${i}`).style.width = (Math.max(0, val) * 20) + '%';
-                });
-            }, 200);
         }
 
-        function showSelection() {
-            document.getElementById('profile-screen').classList.add('hidden');
-            document.getElementById('selection-screen').classList.remove('hidden');
+        // Hilfsfunktion für den internen Tresor (falls du den Button separat lassen willst)
+        function checkInternalVault() {
+            // Hier könntest du direkt zeigen, da man ja schon eingeloggt ist
+            document.getElementById('secret-area').classList.toggle('hidden');
         }
-        // ... hier steht dein bisheriger Code (showProfile, showSelection etc.) ...
 
-        // Diese Funktion prüft das Passwort für die GANZE Seite
-async function checkMainPassword() {
-    // Dein Hash (54AFC667...) bleibt gleich
-    const gespeicherterHash = "54AFC667DB70A404B33657C13D2987B75E35B5A16003FFA5C02D4EEF7CB9B82E";
-    
-    const eingabe = prompt("Gib das Master-Passwort für die Krieger-WG ein:");
-    if (!eingabe) return;
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex.toUpperCase();
+        }
 
-    const eingabeHash = await sha256(eingabe);
-
-    if (eingabeHash === gespeicherterHash) {
-        // Erfolg: Login weg, Content her!
-        document.getElementById('login-overlay').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        alert("Willkommen, Krieger!");
-    } else {
-        alert("Zutritt verweigert! Du gehörst nicht zu uns.");
-    }
-}
-
-// Die sha256 Funktion muss natürlich auch im Script bleiben
-async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-    return hashHex.toUpperCase();
-}
-
-    </script>
-</body>
-</html>
+        // Deine restlichen Funktionen (showProfile, showSelection) hier drunter...
     </script>
 </body>
 </html>
