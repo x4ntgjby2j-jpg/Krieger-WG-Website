@@ -142,6 +142,7 @@
             border-radius: 5px;
             font-size: 1rem;
         }
+     
 
         /* --- PROFILE SCREEN --- */
         .profile-container {
@@ -172,23 +173,23 @@
         
         <div class="grid">
             <div class="char-card" onclick="showProfile(0)">
-                <img src="aeneas.jpg" alt="Aeneas">
-                <h3>Aeneas</h3>
+                <img src="Krieger1.png" alt="Krieger1">
+                <h3>Krieger 1</h3>
                 <p>Der Boss</p>
             </div>
             <div class="char-card" onclick="showProfile(1)">
-                <img src="samuel.jpg" alt="Samuel">
-                <h3>Samuel</h3>
+                <img src="Krieger2.png" alt="Krieger2">
+                <h3>Krieger 2</h3>
                 <p>Floor-Manager</p>
             </div>
             <div class="char-card" onclick="showProfile(2)">
-                <img src="lorenz.jpg" alt="Lorenz">
-                <h3>Lorenz</h3>
+                <img src="Krieger3.png" alt="Krieger3">
+                <h3>Krieger 3</h3>
                 <p>CTO</p>
             </div>
             <div class="char-card" onclick="showProfile(3)">
-                <img src="jonas.jpg" alt="Jonas">
-                <h3>Jonas</h3>
+                <img src="Krieger4.png" alt="Krieger4">
+                <h3>Krieger 4</h3>
                 <p>Der DADDY</p>
             </div>
         </div>
@@ -216,6 +217,22 @@
 
                 <button type="submit">Anfrage abschicken</button>
             </form>
+        </div>
+           <div style="margin-top: 40px; text-align: center;">
+            <button onclick="checkPassword()" style="background: none; border: 1px solid #333; color: #555; cursor: pointer; padding: 10px 20px; border-radius: 5px; text-transform: uppercase; letter-spacing: 1px;">
+                🔒 Interner Krieger-Archiv
+            </button>
+        </div>
+
+        <div id="secret-area" class="hidden" style="margin-top: 50px; padding: 30px; border: 3px double var(--accent); background: #051505; border-radius: 20px; max-width: 600px; width: 100%; text-align: left; box-shadow: 0 0 20px rgba(0,255,4,0.1);">
+            <h2 style="color: var(--accent); text-align: center; text-transform: uppercase;">🔒 DER WG-TRESOR</h2>
+            <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
+            <p><strong>Die ungeschönte Wahrheit der Krieger:</strong></p>
+            <ul style="line-height: 1.8; color: #ccc;">
+                <li>⚠️ Samuel hat seit 3 Wochen nicht staubgesaugt.</li>
+                <li>💰 Lorenz schuldet der Kasse noch 4,50€ für Pizza.</li>
+                <li>🤫 Aeneas schläft heimlich mit einem Kuscheltier namens "Fluffi".</li>
+            </ul>
         </div>
     </div>
 
@@ -305,6 +322,40 @@
             document.getElementById('profile-screen').classList.add('hidden');
             document.getElementById('selection-screen').classList.remove('hidden');
         }
+        // ... hier steht dein bisheriger Code (showProfile, showSelection etc.) ...
+
+        // --- HIER DEN NEUEN CODE EINFÜGEN ---
+        async function checkPassword() {
+            const gespeicherterHash = "54AFC667DB70A404B33657C13D2987B75E35B5A16003FFA5C02D4EEF7CB9B82E";
+            const eingabe = prompt("Identifiziere dich, Krieger! Gib das Passwort ein:");
+            if (!eingabe) return; 
+
+            const eingabeHash = await sha256(eingabe);
+
+            if (eingabeHash === gespeicherterHash) {
+                alert("Zugriff gewährt! Willkommen im inneren Zirkel.");
+                const secretArea = document.getElementById('secret-area');
+                secretArea.classList.remove('hidden');
+                setTimeout(() => {
+                    secretArea.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            } else {
+                alert("FALSCH! Versuchs nochmal, wenn du würdig bist.");
+            }
+        }
+
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex.toUpperCase();
+        }
+        // --- ENDE DES NEUEN CODES ---
+
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
