@@ -142,7 +142,6 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-     
 
         /* --- PROFILE SCREEN --- */
         .profile-container {
@@ -167,7 +166,8 @@
     </style>
 </head>
 <body>
-<div id="login-overlay" style="background: var(--bg-color); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+    <div id="login-overlay" style="background: var(--bg-color); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999; display: flex; justify-content: center; align-items: center; flex-direction: column;">
         <div class="contact-box" style="text-align: center; border-color: var(--accent);">
             <h1 style="color: var(--accent); text-transform: uppercase; letter-spacing: 5px;">Krieger-Zugang</h1>
             <p style="margin-bottom: 20px; color: #888;">Identifiziere dich, um die Hallen der WG zu betreten.</p>
@@ -236,28 +236,70 @@
 
             <div id="secret-area" class="hidden" style="margin-top: 50px; padding: 30px; border: 3px double var(--accent); background: #051505; border-radius: 20px; max-width: 600px; width: 100%; text-align: left;">
                 <h2 style="color: var(--accent); text-align: center; text-transform: uppercase;">🔒 DER WG-TRESOR</h2>
-                <p>Hier liegen die Dokumente...</p>
-                </div>
+                <p><strong>Die ungeschönte Wahrheit der Krieger:</strong></p>
+                <ul style="line-height: 1.8; color: #ccc;">
+                    <li>⚠️ Samuel hat seit 3 Wochen nicht staubgesaugt (Beweisfoto im Archiv).</li>
+                    <li>💰 Lorenz schuldet der Kasse noch 4,50€ für die Pizza vom Dienstag.</li>
+                    <li>🤫 Aeneas schläft heimlich mit einem Kuscheltier namens "Fluffi".</li>
+                </ul>
+            </div>
             
             <footer style="margin-top: 50px; padding: 20px; border-top: 1px solid #222; font-size: 0.8rem; color: #555;">
-                <p>&copy; 2026 Krieger WG | <a href="#" onclick="alert('Impressum: Aeneas ...')" style="color: #555;">Impressum</a></p>
+                <p>&copy; 2026 Krieger WG | <a href="#" onclick="alert('Impressum: Aeneas Beispiel | Kriegerweg 1 | 12345 Walhalla')" style="color: #555;">Impressum</a></p>
             </footer>
         </div>
 
         <div id="profile-screen" class="screen hidden">
-            <button class="back-btn" onclick="showSelection()">← ZURÜCK</button>
+            <button class="back-btn" onclick="showSelection()">← ZURÜCK ZUR KRIEGERSCHAFT</button>
             <div class="profile-container">
-                <div class="profile-left"><img id="p-img" src="" alt="Profil"></div>
+                <div class="profile-left">
+                    <img id="p-img" src="" alt="Profil">
+                </div>
                 <div class="profile-right">
-                    <h2 id="p-name"></h2>
-                    <p id="p-desc"></p>
-                    <p id="p-longtext"></p>
+                    <h2 id="p-name" style="font-size: 3rem; margin: 0; color: var(--accent); text-transform: uppercase;"></h2>
+                    <p id="p-desc" style="font-style: italic; color: var(--accent); margin-bottom: 20px; font-size: 1.2rem;"></p>
+                    <p id="p-longtext" style="line-height: 1.8; color: #eee; margin-bottom: 30px; font-size: 1.1rem;"></p>
                     <div id="stats"></div>
                 </div>
             </div>
         </div>
 
-    </div> <script>
+    </div> 
+
+    <script>
+        const wgDaten = [
+            { 
+                name: "Aeneas", 
+                desc: "Der Portal-Meister", 
+                longText: "Aeneas ist das Mastermind hinter unserem 'Kriegerischen Portal'. Er behauptet zwar, er habe die ersten Zeilen Code auf einer Steintafel in einer norwegischen Höhle geschrieben, aber wir wissen alle, dass er einfach ein Genie ist. Wenn er nicht gerade digitale Welten erschafft, bringt er Goldfischen Synchronsschwimmen bei. Er ist ein exzellenter Koch, der sogar aus einer alten Socke ein Gourmet-Menü zaubern könnte.",
+                img: "Krieger1.png", 
+                stats: [4, 5, 3, 4, 4] 
+            },
+            { 
+                name: "Samuel", 
+                desc: "Der Charmeur", 
+                longText: "Samuel ist so cool, dass die Eiswürfel in seinem Drink freiwillig frieren. Er besitzt ein Diplom in 'Fortgeschrittenem Augenzwinkern' und kann Frauenkomplimente in elf verschiedenen Sprachen flüstern – drei davon hat er selbst erfunden. Man sagt, er habe einmal eine Rose nur durch langes Anstarren zum Blühen gebracht. Ein Typ, der im Regen spazieren geht, ohne nass zu werden.",
+                img: "Krieger2.png", 
+                stats: [5, 4, 2, 5, 5] 
+            },
+            { 
+                name: "Lorenz", 
+                desc: "Der seriöse Stratege", 
+                longText: "Lorenz ist der Inbegriff von Seriosität. Er liest das Telefonbuch zur Entspannung und hat seine Socken nach dem Alphabet sortiert. Er ist ein Gentleman alter Schule und versucht ständig, die Frauenwelt mit seinem Wissen über mittelalterliche Agrarwirtschaft zu beeindrucken. Leider warten die Damen meist noch auf den spannenden Teil, aber Lorenz gibt niemals auf. Ein echter Kämpfer.",
+                img: "Krieger3.png", 
+                stats: [5, 2, 3, 5, 4] 
+            },
+            { 
+                name: "Jonas", 
+                desc: "Der Fels in der Brandung", 
+                longText: "Jonas ist der Mitbewohner, den sich jede WG wünscht. Er ist so verlässlich, dass Schweizer Uhren ihre Zeit nach seinem Kaffeekonsum stellen. Er hat eine so beruhigende Aura, dass wilde Tiere im Wald stehen bleiben, um sich von ihm kraulen zu lassen. Angeblich hat er mal ein Waisenhaus vor einer Horde wilder Hummeln gerettet, indem er ihnen ein Schlaflied vorsang. Ein herzlicher Typ.",
+                img: "Krieger4.png", 
+                stats: [5, 5, 5, 5, 5] 
+            }
+        ];
+
+        const skillNames = ["Sauberkeit", "Frauenversteher", "Lustig", "Verlässlich", "Academic Weapon"];
+
         // --- PASSWORT LOGIK ---
         async function checkMainPassword() {
             const gespeicherterHash = "54AFC667DB70A404B33657C13D2987B75E35B5A16003FFA5C02D4EEF7CB9B82E";
@@ -274,12 +316,6 @@
             }
         }
 
-        // Hilfsfunktion für den internen Tresor (falls du den Button separat lassen willst)
-        function checkInternalVault() {
-            // Hier könntest du direkt zeigen, da man ja schon eingeloggt ist
-            document.getElementById('secret-area').classList.toggle('hidden');
-        }
-
         async function sha256(message) {
             const msgBuffer = new TextEncoder().encode(message);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
@@ -288,7 +324,50 @@
             return hashHex.toUpperCase();
         }
 
-        // Deine restlichen Funktionen (showProfile, showSelection) hier drunter...
+        function checkInternalVault() {
+            document.getElementById('secret-area').classList.toggle('hidden');
+            if (!document.getElementById('secret-area').classList.contains('hidden')) {
+                document.getElementById('secret-area').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // --- PROFIL LOGIK ---
+        function showProfile(index) {
+            const p = wgDaten[index];
+            document.getElementById('p-name').innerText = p.name;
+            document.getElementById('p-desc').innerText = p.desc;
+            document.getElementById('p-longtext').innerText = p.longText;
+            document.getElementById('p-img').src = p.img;
+            
+            const statsContainer = document.getElementById('stats');
+            statsContainer.innerHTML = '';
+            p.stats.forEach((val, i) => {
+                statsContainer.innerHTML += `
+                    <div class="skill-row">
+                        <div style="display:flex; justify-content:space-between; font-weight:bold;">
+                            <span>${skillNames[i]}</span>
+                            <span>${val}/5</span>
+                        </div>
+                        <div class="bar-bg"><div class="bar-fill" id="bar-${i}" style="width: 0%"></div></div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('selection-screen').classList.add('hidden');
+            document.getElementById('profile-screen').classList.remove('hidden');
+            window.scrollTo(0,0);
+
+            setTimeout(() => {
+                p.stats.forEach((val, i) => {
+                    document.getElementById(`bar-${i}`).style.width = (val * 20) + '%';
+                });
+            }, 200);
+        }
+
+        function showSelection() {
+            document.getElementById('profile-screen').classList.add('hidden');
+            document.getElementById('selection-screen').classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
